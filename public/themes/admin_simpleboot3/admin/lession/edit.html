@@ -1,0 +1,61 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('lession/index')}">有声读物</a></li>
+        <li class="active"><a href="{:url('lession/edit')}">编辑</a></li>
+    </ul>
+    <form method="post" class="form-horizontal js-ajax-form margin-top-20" action="{:url('lession/editPost')}">
+        <div class="form-group">
+            <label for="input-name" class="col-sm-2 control-label">标题<span class="form-required">*</span></label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-name" name="title" value="{$result.title}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="thumbnail" class="col-sm-2 control-label"><span class="form-required">*</span>图片</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="hidden" name="thumb" id="thumbnail"  value="{$result.thumb}">
+                <a href="javascript:uploadOneImage('图片上传','#thumbnail');">
+                    <if condition="$result['thumb'] neq ''">
+                        <img src="{:get_upload_path($result['thumb'])}"
+                             id="thumbnail-preview"
+                             style="cursor: pointer;max-width:100px;max-height:100px;"/>
+                        <else />
+                        <img src="__TMPL__/public/assets/images/default-thumbnail.png"
+                             id="thumbnail-preview"
+                             style="cursor: pointer;max-width:100px;max-height:100px;"/>
+                    </if>
+                </a>
+            </div>
+        </div>
+
+<!--        <div class="form-group">-->
+<!--            <label for="video_up" class="col-sm-2 control-label"><span class="form-required">*</span>视频</label>-->
+<!--            <div class="col-md-6 col-sm-10">-->
+<!--                <input type="text" class="form-control" style="width:300px;" name="url" id="thumbnailurl"  value="{$result.url}">-->
+<!--                <a href="javascript:uploadOne('视频上传','#thumbnailurl','video');" id='video_up'>-->
+<!--                    <input type="button" class="btn btn-sm btn-cancel-thumbnailurl" value="视频上传">-->
+<!--                </a>-->
+<!--            </div>-->
+<!--        </div>-->
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input type="hidden" class="form-control" name="id" value="{$result.id}">
+                <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('EDIT')}</button>
+                <a class="btn btn-default" href="{:url('lession/index')}">{:lang('BACK')}</a>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+
+<script type="text/javascript">
+
+
+</script>
+
+</body>
+</html>

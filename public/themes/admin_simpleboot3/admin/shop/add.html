@@ -1,0 +1,100 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('shop/goods')}">商品</a></li>
+        <li class="active"><a href="{:url('shop/add')}">添加</a></li>
+    </ul>
+    <form method="post" class="form-horizontal js-ajax-form margin-top-20" action="{:url('shop/addPost')}">
+        <div class="form-group">
+            <label for="input-name" class="col-sm-2 control-label">标题<span class="form-required">*</span></label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-name" name="title">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="input-name" class="col-sm-2 control-label">价值积分<span class="form-required">*</span></label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-score" name="score">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="thumbnail" class="col-sm-2 control-label"><span class="form-required">*</span>封面图</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="hidden" name="thumb" id="thumbnail"  value="">
+                <a href="javascript:uploadOneImage('图片上传','#thumbnail');">
+                    <img src="__TMPL__/public/assets/images/default-thumbnail.png"
+                         id="thumbnail-preview"
+                         style="cursor: pointer;max-width:100px;max-height:100px;"/>
+                </a>
+
+                <input type="button" class="btn btn-sm btn-cancel-thumbnail" value="取消图片">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="" class="col-sm-2 control-label"><span class="form-required">*</span>介绍图(可多张)</label>
+            <div class="col-md-6 col-sm-10">
+                <ul id="photos" class="pic-list list-unstyled form-inline"></ul>
+                <a href="javascript:uploadMultiImage('图片上传','#photos','photos-item-tpl');"
+                   class="btn btn-default btn-sm">选择图片</a>
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="input-content" class="col-sm-2 control-label"><span class="form-required">*</span>简介</label>
+            <div class="col-md-6 col-sm-10">
+                <textarea class="form-control" id="input-content" name="content"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('ADD')}</button>
+                <a class="btn btn-default" href="{:url('shop/goods')}">{:lang('BACK')}</a>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="__STATIC__/js/admin.js?t=2"></script>
+<script type="text/javascript">
+    //编辑器路径定义
+    var editorURL = GV.WEB_ROOT;
+</script>
+<script type="text/javascript" src="__STATIC__/js/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="__STATIC__/js/ueditor/ueditor.all.min.js"></script>
+
+<script type="text/html" id="photos-item-tpl">
+    <li id="saved-image{id}">
+        <input id="photo-{id}" type="hidden" name="multi_thumb[]" value="{filepath}">
+        <img id="photo-{id}-preview" src="{url}" style="height:86px;width: 106px;"
+             onclick="imagePreviewDialog(this.src);">
+        <a href="javascript:uploadOneImage('图片上传','#photo-{id}');">替换</a>
+        <a href="javascript:(function(){$('#saved-image{id}').remove();})();">移除</a>
+    </li>
+</script>
+
+<script type="text/javascript">
+
+    $(function () {
+        editorcontent = new baidu.editor.ui.Editor();
+        editorcontent.render('content');
+        try {
+            editorcontent.sync();
+        } catch (err) {
+        }
+
+        $('#more-template-select').val("{$post.more.template|default=''}");
+    });
+
+
+
+
+
+</script>
+</body>
+</html>

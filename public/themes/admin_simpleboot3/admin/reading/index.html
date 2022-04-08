@@ -1,0 +1,53 @@
+<include file="public@header" />
+</head>
+<body>
+	<div class="wrap js-check-wrap">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="{:url('reading/index',array('readid'=>$readid))}">读物列表</a></li>
+			<li><a href="{:url('reading/add',array('readid'=>$readid))}">添加</a></li>
+		</ul>
+		<table class="table table-hover table-bordered margin-top-20">
+			<thead>
+				<tr>
+					<th width="50">ID</th>
+					<th>标题</th>
+					<th>音频</th>
+					<th width="100">试题列表</th>
+					<th width="100">答题情况</th>
+					<th width="160">{:lang('ACTIONS')}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<foreach name="list" item="vo">
+				<tr>		
+					<td>{$vo.id}</td>
+					<td>{$vo.title}</td>
+					<td>
+						<audio controls="controls">
+							<source src="{$vo.url}"></source>
+						</audio>
+					</td>
+					<td>
+						<a class="btn btn-xs btn-primary" href="javascript:parent.openIframeLayer('{:url('question/index',array('reading_id'=>$vo['id']))}')">点击查看</a>
+					</td>
+					<td>
+						<a class="btn btn-xs btn-primary" href="javascript:parent.openIframeLayer('{:url('question/answerlist',array('reading_id'=>$vo['id']))}')">点击查看</a>
+					</td>
+
+					<td>
+						<a class="btn btn-xs btn-primary" href="{:url('reading/edit',array('id'=>$vo['id'],'readid'=>$readid))}">{:lang('EDIT')}</a>
+						
+						<a class="btn btn-xs btn-danger js-ajax-delete" href="{:url('reading/delete',array('id'=>$vo['id'],'readid'=>$readid))}">{:lang('DELETE')}</a>
+					</td>
+				</tr>
+				</foreach>
+				
+			</tbody>
+		</table>
+
+		
+		<div class="pagination">{$page}</div>
+	</div>
+	<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>

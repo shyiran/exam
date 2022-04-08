@@ -1,0 +1,39 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('reading/index',array('readid'=>$readid))}">读物列表</a></li>
+        <li class="active"><a href="{:url('reading/add',array('readid'=>$readid))}">添加</a></li>
+    </ul>
+    <form method="post" class="form-horizontal js-ajax-form margin-top-20" action="{:url('reading/addPost')}">
+        <div class="form-group">
+            <label for="input-name" class="col-sm-2 control-label">标题<span class="form-required">*</span></label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-name" name="title">
+            </div>
+        </div>
+
+		<div class="form-group">
+			<label for="input-user_login" class="col-sm-2 control-label"><span class="form-required">*</span>音频</label>
+			<div class="col-md-6 col-sm-10">
+				<input type="text" class="form-control" style="width:300px;" name="url" id="thumbnailurl"  value="">
+				<a href="javascript:uploadOne('音频上传','#thumbnailurl','audio');" id='video_up'>
+					<input type="button" class="btn btn-sm btn-cancel-thumbnailurl" value="音频上传">
+
+				</a>					
+			</div>
+		</div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+				<input type="hidden" value="{$readid}" name="readid">
+                <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('ADD')}</button>
+                <a class="btn btn-default" href="{:url('reading/index',array('readid'=>$readid))}">{:lang('BACK')}</a>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>
